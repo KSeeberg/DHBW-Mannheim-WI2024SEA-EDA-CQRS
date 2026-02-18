@@ -33,6 +33,8 @@ public class SmarthomeApplication implements CommandLineRunner {
 
             if (input.equalsIgnoreCase("exit")) {
                 System.out.println("Exiting...");
+                scanner.close();
+                System.exit(0);
                 break;
             }
             if (input.equalsIgnoreCase("status")) {
