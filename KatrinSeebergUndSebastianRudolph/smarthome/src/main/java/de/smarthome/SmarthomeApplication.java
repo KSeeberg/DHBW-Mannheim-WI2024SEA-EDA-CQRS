@@ -7,14 +7,18 @@ import org.springframework.boot.CommandLineRunner;
 import java.util.Scanner;
 import de.smarthome.command.PersonArrivedCommand;
 import de.smarthome.command.PersonLeftCommand;
+import de.smarthome.consumer.QueryService;
+
 
 @SpringBootApplication
 public class SmarthomeApplication implements CommandLineRunner {
 
     private CommandHandler commandHandler;
+    private QueryService queryService;
 
-    public SmarthomeApplication(CommandHandler commandHandler) {
+    public SmarthomeApplication(CommandHandler commandHandler, QueryService queryService) {
         this.commandHandler = commandHandler;
+        this.queryService = queryService;
     }
 
     public static void main(String[] args) {
@@ -29,10 +33,12 @@ public class SmarthomeApplication implements CommandLineRunner {
 
             if (input.equalsIgnoreCase("exit")) {
                 System.out.println("Exiting...");
+                scanner.close();
+                System.exit(0);
                 break;
             }
             if (input.equalsIgnoreCase("status")) {
-                System.out.println("Status kommt noch...");
+                System.out.println(queryService.getStatus());
                 continue;
             }
 
